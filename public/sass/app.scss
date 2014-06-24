@@ -1,0 +1,36 @@
+/*/ 
+    Setup:
+    	1: Libraries
+        2: Import of settings and variables
+        3: Atoms
+        4: Molecules
+        5: Organisms
+/*/
+
+/*/
+    1: Libraries
+/*/
+	@import "libs/bourbon/bourbon";
+	@import "libs/neat/neat";
+	@import "libs/bitters/bitters";
+
+/*/
+    2: Settings, mixins & global variables
+/*/
+	@import "utilities/variables/colors";
+	@import "utilities/variables/defaults";
+	@import "utilities/mixins";
+
+/*/
+    3: Atoms
+/*/
+
+
+/*/
+    4: Molecules
+/*/
+
+
+/*/
+    5: Organisms
+/*/

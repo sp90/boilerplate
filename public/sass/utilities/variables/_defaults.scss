@@ -1,0 +1,22 @@
+$font-size--huge        : 32px !default;
+$font-size--large       : 18px !default;
+$font-size--standard    : 14px !default;
+$font-size--small       : 12px !default;
+
+// define other line heights besides this auto generated
+
+$font-family--fallback  : 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
+$font-family--base      : 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', 'LucidaGrandeFace', $font-family--fallback !default;
+$font-family--bold      : 'Lucida Sans Bold', 'Lucida Grande Bold', 'Lucida Sans Unicode Bold', 'LucidaGrandeBoldFace', $font-family--fallback !default;
+
+//
+// Custom font mixin - for default usage of font styling
+//
+@mixin font($size: $font-size--standard, $weight: normal){
+	$line-height--ratio : $size + 2;
+  @if $weight == normal {
+    font: $weight $size/$line-height--ratio $font-family--base;
+  } @else if $type == bold {
+    font: $weight $size/$line-height--ratio $font-family--bold;
+  }
+}

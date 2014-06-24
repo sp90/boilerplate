@@ -1,0 +1,27 @@
+{
+  "name": "experiments",
+  "version": "1.0.0",
+  "description": "Experiments with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sass public/sass/app.scss:public/css/all.css && grunt build:prod",
+    "startup": "npm install && npm run build && npm start"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-clean": "~0.5.0"
+  },
+  "dependencies": {
+    "express": "~4.4.4",
+    "nedb": "~0.10.5",
+    "connect": "~3.0.1",
+    "body-parser": "~1.4.3",
+    "method-override": "~2.0.2",
+    "express-hbs": "~0.7.10",
+    "connect-gzip": "~0.1.6"
+  }
+}

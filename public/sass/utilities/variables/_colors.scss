@@ -1,0 +1,21 @@
+/*------------------------------------*\
+    $COLORS
+\*------------------------------------*/
+
+/*
+ * Primary colors
+ *
+ */
+$color__primary               : #ccc;
+$color__primary--active       : darken($color__primary, 30%);
+$color__primary--hover        : darken($color__primary, 20%);
+
+
+
+/*
+ * Secondary color
+ *
+ */
+$color__secondary             : #aaa;
+$color__secondary--active     : darken($color__secondary, 30%);
+$color__secondary--hover      : darken($color__secondary, 20%);

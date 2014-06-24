@@ -1,0 +1,25 @@
+ <!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+		{{> metatags}}
+    <title>{{ metaSetup.title }} - {{ metaSetup.pagetitle }}</title>
+    <link href="/css/all.css" rel="stylesheet" />
+
+    <!-- 
+    	IE8 and below selector support
+			http://selectivizr.com/
+    -->
+    <!--[if lt IE 9]>
+    	<script src="js/ie-compat/selectivizr-min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	{{> header}}
+    {{{body}}}
+    {{> footer}}
+    <script src="js/build/all.min.js"></script>
+  </body>
+</html>

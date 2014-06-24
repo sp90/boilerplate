@@ -1,0 +1,249 @@
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+/*Breakpoint property array*/
+@mixin breakpoint-property-array($list, $property, $important : false) {
+  @each $item in $list {
+    $key: nth($item, 1);
+    $declaration: nth($item, 2);
+
+    @include breakpoint(find-value($key, $breakpoints)) {
+      @if $important == true {
+        #{$property} : $declaration !important;
+      } @else {
+        #{$property} : $declaration;
+      }
+    }
+
+    //@debug 'name (breakpoint): ' + $key + ' declaration: ' + $declaration;
+  };
+}
+
+
+/**
+ * Output vendor properties
+ */
+
+@mixin vendor($property, $value...) {
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  -o-#{$property}: $value;
+}
+
+/**
+ * Font smoothing for chrome MAC
+ */
+
+@mixin font-smoothing($val: antialiased) {
+  -webkit-font-smoothing: $val;
+  -moz-font-smoothing: $val;
+  -ms-font-smoothing: $val;
+  -o-font-smoothing: $val;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+}
+
+/**
+ * Retina image
+ */
+
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+  (-o-min-device-pixel-ratio: 2.6/2),
+  (-webkit-min-device-pixel-ratio: 1.3),
+  (min-device-pixel-ratio: 1.3),
+  (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+
+/* Selectors
+========================================================================== */
+@mixin attr-selector($object, $attr, $identifyer) {
+  #{$object}[#{$attr}=#{$identifyer}] {
+    @content;
+  }
+}
+
+@mixin page($identifyer) {
+    @include attr-selector(div, data-role, $identifyer) {
+        @content;
+    }
+}
+
+@mixin tile-type($identifyer) {
+    [data-type=#{$identifyer}] {
+        @content;
+    }
+}
+
+@mixin tile-id($identifyer) {
+    @include attr-selector('.tile', data-id, $identifyer) {
+        .tile--container {
+            @content;
+        }
+    }
+}
+
+@mixin placeholder {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder           {@content}
+    &::-moz-placeholder          {@content}
+    &:-ms-input-placeholder      {@content}
+}
+@mixin ie($version,$depth:true) {
+  @if $depth == false {
+    @if $version == 8 {
+      html.lt-ie9 {
+        @content;
+      }
+    }
+    @if $version == 7 {
+      html.lt-ie8 {
+        @content;
+      }
+    }
+  } @else {
+    @if $version == 8 {
+      .lt-ie9 & {
+        @content;
+      }
+    }
+    @if $version == 7 {
+      .lt-ie8 & {
+        @content;
+      }
+    }
+  }
+}
+
+/* Properties
+========================================================================== */
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin clear-ios-touch {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+@mixin clear-transform {
+  -webkit-transform: none; /* Safari and Chrome */
+  -moz-transform: none; /* Firefox */
+  -ms-transform: none; /* IE 9 */
+  -o-transform: none; /* Opera */
+  transform: none;
+}
+@mixin animation__delay--overwrite($ms) {
+  -webkit-animation-delay : $ms !important;
+  -moz-animation-delay :    $ms !important;
+  -o-animation-delay :      $ms !important;
+  animation-delay :         $ms !important;
+}
+
+
+/* Layouts
+========================================================================== */
+@mixin quadratic($size, $prefix: '') {
+  #{$prefix}width: $size;
+  #{$prefix}height: $size;
+}
+
+@mixin positioner($top: 0, $left: 0, $bottom: 0, $right: 0, $position: absolute) {
+  position: $position;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+@mixin transform__custom($string) {
+  -webkit-transform: $string;
+  -moz-transform: $string;
+  -ms-transform: $string;
+  -o-transform: $string;
+  transform: $string;
+}
+
+@mixin ie-background-scale($url) {
+  .lte8 & {
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$base-url + $url}',sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$base-url + $url}',sizingMethod='scale')";
+  }
+}
+@mixin background-cover($url) {
+  background: url('#{$url}') no-repeat center;
+  @include background-size(cover);
+}
+
+@mixin triangle($dir, $size, $color) {
+  border: $size transparent solid;
+
+  @if ($dir == "top" or $dir == "up" or $dir == "left" or $dir == "before") {
+    &:before {
+      @if ($dir == "top" or $dir == "up") {
+        border-bottom-color: $color;
+      } @else if ($dir == "right" or $dir == "after") {
+        border-left-color: $color;
+      }
+    }
+  } @else if ($dir == "bottom" or $dir == "down" or $dir == "left" or $dir == "before") {
+    &:after {
+      @if ($dir == "bottom" or $dir == "down") {
+        border-top-color: $color;
+      } @else if ($dir == "left" or $dir == "before") {
+        border-right-color: $color;
+      }
+    }
+  }
+}
+
+@mixin scrollbar($size, $primary, $secondary: lighten($primary, 25%)) {
+    ::-webkit-scrollbar {
+        width:  $size;
+        height: $size;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: $primary;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: $secondary;
+    }
+
+    // For Internet Explorer
+    body {
+        scrollbar-face-color: $primary;
+        scrollbar-track-color: $secondary;
+    }
+}
+
+/* Animations
+========================================================================== */
+
+@mixin default-transition($properties: all, $speed: 300ms, $ease: ease, $delay: 0ms) {
+  -webkit-transition: $properties $speed $ease $delay;
+  transition: $properties $speed $ease $delay;
+}
