@@ -8,3 +8,7 @@ To get started just run:
     npm run startup
   
 This will build the project including, npm install, sass build & javascript minifing
+
+It will run the node server on port 3000, this is changed in the index.js - it will cast an error if you have something running on port 3000 already
+
+GL HF
