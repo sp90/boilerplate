@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "sass public/sass/app.scss:public/css/all.css && grunt build:prod",
+    "sass": "sass public/sass/app.scss:public/css/all.css",
+    "sass:w": "sass --watch public/sass/app.scss:public/css/all.css",
+    "sass:ws": "sass --watch --sourcemap --poll public/sass/app.scss:public/css/all.css",
+    "build": "npm run sass && grunt build:prod",
     "startup": "npm install && npm run build && npm start"
   },
   "devDependencies": {
