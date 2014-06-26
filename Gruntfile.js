@@ -12,6 +12,7 @@ module.exports = function (grunt) {
                   'public/js/libs/modernizr-v2.8.3.js',
                   'public/js/libs/jquery-v1.11.1.js',
                   'public/js/libs/lodash.compat-v2.4.1.js',
+                  'public/js/plugins/browserVersion.js',
                   'public/js/plugins/smartresize.js',
                   'public/js/main.js'
                 ],
