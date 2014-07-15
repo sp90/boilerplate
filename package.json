@@ -24,7 +24,6 @@
     "connect": "~3.0.1",
     "body-parser": "~1.4.3",
     "method-override": "~2.0.2",
-    "express-hbs": "~0.7.10",
-    "connect-gzip": "~0.1.6"
+    "express-hbs": "~0.7.10"
   }
 }
