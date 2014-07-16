@@ -2,7 +2,6 @@ var express = require('express');
 var connect = require('connect');
 var http = require('http');
 var bodyParser = require('body-parser');
-var gzip = require('connect-gzip');
 var methodOverride = require('method-override');
 var app = express();
 
@@ -19,7 +18,6 @@ app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(process.cwd() + '/public'));
-gzip.staticGzip(__dirname + '/public', { maxAge: 86400000 }); //86400000ms = 1 day
 //app.use(bodyParser.json());
 //app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
