@@ -40,7 +40,7 @@ $(function(){
 		var browserVersion = get_browser() + get_browser_version();
 		console.log(get_browser());
 		console.log(get_browser_version());
-		console.log(browserVersion);
+		console.log(browserVersion); 
 	/*/
 		if(get_browser() == "IE") {
 			if(get_browser_version() < 9) {

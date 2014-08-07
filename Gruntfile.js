@@ -33,14 +33,46 @@ module.exports = function (grunt) {
                 }
             }
         },
+        sass: {                              // Task
+            dist: {                            // Target
+                options: {                       // Target options
+                    style: 'expanded'
+                },
+                files: {                         // Dictionary of files
+                    'public/css/all.css': 'public/sass/app.scss'       // 'destination': 'source'
+                }
+            }
+        },
+        watch: {
+            js: {
+                files: ['public/js/**/*.js'],
+                tasks: [ 'concat' ]
+            },
+            sass: {
+              files: ['public/sass/**/*.scss'],
+              tasks: ['sass'],
+            }
+        },
+        concurrent: {
+          watchAll: {
+            tasks: ['watch'],
+            options: {
+              logConcurrentOutput: true
+            }
+          }
+        },
         clean: ['.sass-cache']
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     grunt.registerTask('default', ['concat']);
-    grunt.registerTask('build:prod', ['concat', 'uglify', 'clean']);
+    grunt.registerTask('dev',  ['concurrent']);
+    grunt.registerTask('build:prod', ['concat', 'uglify','sass', 'clean']);
 };
 
