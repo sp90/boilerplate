@@ -1,0 +1,14 @@
+$fontpath: /fonts/;
+
+@font-face {
+	$font-name: Bariol_Regular;
+	
+    font-family: '#{$font-name}';
+    src: url('#{$fontpath}#{$font-name}.eot?');
+    src: url('#{$fontpath}#{$font-name}.eot?#iefix') format('embedded-opentype'), 
+	     url('#{$fontpath}#{$font-name}.woff?') format('woff'), 
+	     url('#{$fontpath}#{$font-name}.ttf?') format('truetype'), 
+	     url('#{$fontpath}#{$font-name}.svg?') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
