@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/sp90/boilerplate/badge.png)](https://coveralls.io/r/sp90/boilerplate)
+
 
 Boilerplate
 ===========
