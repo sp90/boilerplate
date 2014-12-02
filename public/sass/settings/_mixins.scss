@@ -1,0 +1,272 @@
+/*/ 
+    Setup:
+      1: Fonts
+        1.1: font-face-custom
+        1.2: font-size
+        1.3: font-smoothing
+      2: Images
+        2.1: Retina
+      3: Responsive
+        3.1: Breakpoints
+      4: Misc
+        4.1: Vendor Prefixes
+        4.2: Placeholder
+        4.3: Positioning
+        4.4: Scrollbar
+/*/
+
+
+//
+//  Fonts
+//
+
+  /*/
+    1.1 font-face
+  /*/
+    @mixin font-face-custom($fontpath, $familyname, $filename, $weight: 400, $style: normal){
+      @font-face {
+         font-family: '#{$familyname}';
+         src: url('#{$fontpath}#{$filename}.eot?');
+         src: url('#{$fontpath}#{$filename}.eot?#iefix') format('embedded-opentype'), 
+          url('#{$fontpath}#{$filename}.woff?') format('woff'), 
+          url('#{$fontpath}#{$filename}.ttf?') format('truetype'), 
+          url('#{$fontpath}#{$filename}.svg?') format('svg');
+         font-weight: $weight;
+         font-style: $style;
+      }
+    }
+
+  /*/
+      1.2 font-size
+      
+      Example usage:
+        font-size(16);
+        font-size(16, medium);
+        font-size(16, medium, 24);
+      
+      Notes: 
+        Note that the numeric font-size is required to allow the line-height to be generated correctly.
+  /*/
+    @mixin font-size($size, $keyword: null, $line-height:$line-height--base) {
+        @if $keyword{
+            font-size: $keyword;
+        }
+        @else {
+            font-size: 0px + $size;
+            font-size: $size / $font-size--standard +rem;
+        }
+
+        line-height: round($line-height / $size*10000) / 10000;
+        margin-bottom: 0px + $line-height;
+        margin-bottom: ($line-height / $font-size--standard)+rem ;
+    }
+
+  /*/
+      1.3 font-smoothing
+  /*/
+    @mixin font-smoothing($val: antialiased) {
+      -webkit-font-smoothing: $val;
+      -moz-font-smoothing: $val;
+      -ms-font-smoothing: $val;
+      -o-font-smoothing: $val;
+      text-rendering: optimizeLegibility;
+      font-smooth: always;
+      font-smoothing: antialiased;
+    }
+
+
+
+//
+//  Images
+//
+
+  /*/
+      2.1 Retina
+  /*/
+    @mixin image-2x($image, $width : 0px, $height : 0px) {
+      @media (min--moz-device-pixel-ratio: 1.3),
+      (-o-min-device-pixel-ratio: 2.6/2),
+      (-webkit-min-device-pixel-ratio: 1.3),
+      (min-device-pixel-ratio: 1.3),
+      (min-resolution: 1.3dppx) {
+        background-image: url($image);
+        @if $width == 'cover' {
+            @include background-size(cover);
+        } @else {
+            @include background-size($width, $height);
+        }
+      }
+    }
+
+//
+//  Responsive
+//
+  /*/
+      3.1 Breakpoints
+        $breakpoints     : (
+            'nano'  '(max-width: 568px)',
+            'milli' '(min-width: 569px)',
+            'centi' '(min-width: 960px)',
+            'kilo'  '(min-width: 1025px)',
+            'mega'  '(min-width: 1360px)',
+            'giga'  '(min-width: 1900px)'
+        ) !default;
+  /*/
+  @mixin breakpoint($point) {
+    @if $point == giga {
+      @media only screen and (min-width: 1900px) { @content ; }
+    }
+    @else if $point == mega {
+      @media only screen and (min-width: 1360px)  { @content ; }
+    }
+    @else if $point == kilo {
+      @media only screen and (min-width: 1025px)  { @content ; }
+    }
+    @else if $point == centi {
+      @media only screen and (min-width: 960px)   { @content ; }
+    }
+    @else if $point == milli {
+      @media only screen and (min-width: 569px)   { @content ; }
+    }
+    @else if $point == nano {
+      @media only screen and (max-width: 568px) { @content ; }
+    }
+    @else if $point == print {
+      @media print { @content ; }
+    }
+  }
+
+//
+//  Misc
+//
+
+  /*/
+      4.1 Vendor prefixes
+  /*/
+    @mixin vendor ($property, $value, $prefixes) {
+      @each $prefix in $prefixes {
+        @if $prefix == webkit {
+          @if $prefix-for-webkit {
+            -webkit-#{$property}: $value;
+          }
+        }
+        @else if $prefix == moz {
+          @if $prefix-for-mozilla {
+            -moz-#{$property}: $value;
+          }
+        }
+        @else if $prefix == ms {
+          @if $prefix-for-microsoft {
+            -ms-#{$property}: $value;
+          }
+        }
+        @else if $prefix == o {
+          @if $prefix-for-opera {
+            -o-#{$property}: $value;
+          }
+        }
+        @else if $prefix == spec {
+          @if $prefix-for-spec {
+            #{$property}: $value;
+          }
+        }
+        @else  {
+          @warn "Unrecognized prefix: #{$prefix}";
+        }
+      }
+    }
+
+  /*/
+      4.2 Placeholder
+  /*/
+  @mixin placeholder {
+      &.placeholder                {@content}
+      &::-webkit-input-placeholder {@content}
+      &:-moz-placeholder           {@content}
+      &::-moz-placeholder          {@content}
+      &:-ms-input-placeholder      {@content}
+  }
+
+  /*/
+      4.3 Positioning
+  /*/
+    @mixin pos ($offsets, $shorthand: absolute) {
+      
+      @if $shorthand == "r" or $shorthand == "rel" or $shorthand == "relative" {
+        position: relative;
+      } @else if $shorthand == "a" or $shorthand == "ab" or $shorthand == "abs" or $shorthand == "absolute" {
+        position: absolute;
+      } @else if $shorthand == "f" or $shorthand == "fix" or $shorthand == "fixed" {
+        position: fixed;
+      } @else { //didn't match, don't output anything
+        @debug "position accepts 'r, rel, relative, a, ab, abs, absolute, f, fix, fixed' as shorthands"
+      }
+
+      @if length($offsets) == 1 {
+        $positionProperty: top, right, bottom, left;
+
+        @if $offsets != none {
+          @each $property in $positionProperty {#{$property}: $offsets; }
+        }
+      } @else if length($offsets) == 2 {
+        @if nth($offsets, 1) != none {
+          top: nth($offsets, 1);
+          bottom: nth($offsets, 1);
+          @if nth($offsets, 2) != none {
+            right: nth($offsets, 2);
+            left: nth($offsets, 2);
+          }
+        } @else if length($offsets) == 3 {
+          @if nth($offsets, 1) != none {
+            top: nth($offsets, 1);
+          }
+          @if nth($offsets, 2) != none {
+            right: nth($offsets, 2);
+            left: nth($offsets, 2);
+          }
+          @if nth($offsets, 3) != none {
+            bottom: nth($offsets, 3);
+          }
+        } @else if length($offsets) == 4 {
+          @if nth($offsets, 1) != none {
+            top: nth($offsets, 1);
+          }
+          @if nth($offsets, 2) != none {
+            right: nth($offsets, 2);
+          }
+          @if nth($offsets, 3) != none {
+            bottom: nth($offsets, 3);
+          }
+          @if nth($offsets, 4) != none {
+            left: nth($offsets, 4);
+          }
+        }
+      }
+    }
+  
+
+  @mixin scrollbar($size, $primary, $secondary: lighten($primary, 25%)) {
+    ::-webkit-scrollbar {
+      width: $size;
+      height: $size;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: $primary;
+      @include breakpoint(print) {
+        background: none;
+      }
+    }
+
+    ::-webkit-scrollbar-track {
+      background: $secondary;
+      @include breakpoint(print) {
+        background: none;
+      }
+    }
+
+    * {
+      scrollbar-face-color: $primary;
+      scrollbar-track-color: $secondary;
+    }
+  }

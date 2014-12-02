@@ -1,0 +1,48 @@
+/*------------------------------------*\
+    $FONT-STACK - Font face declarations
+
+	Black 	(font-weight: 800;)
+	Bold 	(font-weight: 600;)
+	Regular (font-weight: 400;)
+	Light 	(font-weight: 200;)
+	Thin 	(font-weight: 100;)
+
+----------------------------------------
+
+	Example - lets say we wanna embed a 
+	bold font with both normal and italic 
+	font and the files are named following:
+
+	bariol_bold.otf 
+	bariol_bold_italic.otf
+
+	could be any file type the mixin takes 
+	care of the rest but then you use it 
+	like this in the mixin
+ 	
+ 	Explained:
+
+		@include font-face-custom(FONTPATH, FONTNAME, FILENAME, WEIGHT, STYLE);
+		
+		//FONTPATH is the path to your path to your fonts folder containing the font files
+		//FONTNAME is the name of the family
+		//FILENAME is the name of the file you wanna embed
+		//WEIGHT is the weight of the file you wanna embed
+		//STYLE is the style of the file you wanna embed
+
+	The use would look like this:
+
+		$fontFolderPath		: '../assets/fonts/'; // font path
+		$bariol 			: Bariol; 			  // font name
+
+		// Bold
+		@include font-face-custom($fontFolderPath, $bariol, bariol_bold, 600, normal);
+		@include font-face-custom($fontFolderPath, $bariol, bariol_bold_italic, 600, italic);
+
+		// Regular
+		@include font-face-custom($fontFolderPath, $bariol, bariol_regular, 400, normal);
+		@inc... 
+
+		and so on.
+
+\*------------------------------------*/

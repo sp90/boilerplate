@@ -7,13 +7,12 @@ module.exports = function (grunt) {
             },
             main:{
                 src: [
-                  'public/js/libs/angular.js',
-                  'public/js/libs/angular-route.js',
                   'public/js/libs/modernizr-v2.8.3.js',
                   'public/js/libs/jquery-v1.11.1.js',
-                  'public/js/libs/lodash.compat-v2.4.1.js',
-                  'public/js/plugins/browserVersion.js',
-                  'public/js/plugins/smartresize.js',
+                  'public/js/libs/angular.js',
+                  'public/js/libs/angular-route.js',
+                  'public/js/libs/*.js',
+                  'public/js/plugins/*.js',
                   'public/js/main.js'
                 ],
                 dest: 'public/js/build/all.js'
@@ -21,32 +20,40 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                // the banner is inserted at the top of the output
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
                 mangle: {
-                    except: ['jQuery', 'angular']
+                    except: ['jQuery', 'angular', '$']
                 }
             },
             dist: {
                 files: {
-                    'public/js/build/all.min.js': ['<%= concat.main.dest %>']
+                    'public/js/build/all.js': ['<%= concat.main.dest %>']
                 }
             }
         },
-        sass: {                              // Task
-            dist: {                            // Target
-                options: {                       // Target options
-                    style: 'expanded'
+        sass: {
+            dev: {
+                options: {
+                    style: 'expanded',
+                    sourcemap: true
                 },
-                files: {                         // Dictionary of files
-                    'public/css/all.css': 'public/sass/app.scss'       // 'destination': 'source'
+                files: {
+                    'public/css/all.css': 'public/sass/app.scss'
                 }
-            }
+            },
+            dist: {
+                options: {
+                    style: 'compressed'
+                },
+                files: {
+                    'public/css/all.css': 'public/sass/app.scss'
+                }
+            } 
         },
         watch: {
             js: {
                 files: ['public/js/**/*.js'],
-                tasks: [ 'concat' ]
+                tasks: ['clean:js', 'concat']
             },
             sass: {
               files: ['public/sass/**/*.scss'],
@@ -55,13 +62,16 @@ module.exports = function (grunt) {
         },
         concurrent: {
           watchAll: {
-            tasks: ['watch'],
+            tasks: ['watch:js', 'watch:sass'],
             options: {
               logConcurrentOutput: true
             }
           }
         },
-        clean: ['.sass-cache']
+        clean: {
+            sass: ['.sass-cache'],
+            js: ['public/js/build/*']
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -71,8 +81,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('default', ['concat']);
-    grunt.registerTask('dev',  ['concurrent']);
-    grunt.registerTask('build:prod', ['concat', 'uglify','sass', 'clean']);
+    grunt.registerTask('default', ['clean:js' ,'concat', 'sass:dev', 'clean:sass']);
+
+    grunt.registerTask('dev',  ['clean:js' ,'concat', 'sass:dev','concurrent']);
+    grunt.registerTask('build:prod', ['clean:js' ,'concat', 'uglify', 'sass:dev', 'clean:sass']);
 };
 

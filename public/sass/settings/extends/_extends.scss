@@ -1,0 +1,16 @@
+@import "grid";
+
+/*
+	Grid item & display: inline-block; 
+*/
+.grid__item {
+	text-align: left;
+}
+.grid {
+	text-align: justify; 
+	&:after {
+		content: '';
+		display: inline-block;
+		width: 100%;
+	}
+}

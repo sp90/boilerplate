@@ -1,0 +1,20 @@
+$fs--h1         : 32px !default;
+$fs--h2       	: 24px !default;
+$fs--h3       	: 18px !default;
+$fs--h4       	: 15px !default;
+$fs--h5       	: 12px !default;
+$fs--h6       	: 11px !default;
+
+$fs--p			: 12px !default;
+
+$ff--fallback  : 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
+$ff--base      : 'open-sans', $ff--fallback !default;
+$ff--bold      : 'open-sans', $ff--fallback !default;
+
+//
+// Custom font mixin - for default usage of font styling
+// 
+@mixin font($size: $fs--p, $weight: normal, $family: $ff--base){
+  $line-height--ratio: $size + 4;
+  font: $weight #{$size}/#{$line-height--ratio} #{$family};
+} 

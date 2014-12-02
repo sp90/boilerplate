@@ -1,0 +1,81 @@
+/*
+   Setup headers:
+
+      Why the classes its if the design 
+      tells you their are 3 h1's in SEO 
+      you still are forced to only use 1
+      then you can set <h2 class="h1"></h2> 
+      and it would be same style as a h1
+
+*/
+
+$normalColor: #323232;
+$invertColor: white;
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+   font-weight: normal;
+   margin: 0 0 0.50em;
+}
+
+h1,.h1 {
+   @include font($fs--h1, normal, $ff--base);
+   color: $normalColor;
+   text-transform: uppercase;
+   &.b {
+      @include font($fs--h1, bold, $ff--bold);
+   }
+   &.invert {
+      color: $invertColor;
+   }
+}
+h2,.h2 {
+   @include font($fs--h2, normal, $ff--base);
+   color: $normalColor;
+   &.b {
+      @include font($fs--h2, bold, $ff--bold);
+   }
+   &.invert {
+      color: $invertColor;
+   }
+}
+h3,.h3 {
+   @include font($fs--h3, normal, $ff--base);
+   color: $normalColor;
+   &.b {
+      @include font($fs--h3, bold, $ff--bold);
+   }
+   &.invert {
+      color: $invertColor;
+   }
+}
+h4,.h4 {
+   @include font($fs--h4, normal, $ff--base);
+   color: $normalColor;
+   &.b {
+      @include font($fs--h4, bold, $ff--bold);
+   }
+   &.invert {
+      color: $invertColor;
+   }
+}
+h5,.h5 {
+   @include font($fs--h5, normal, $ff--base);
+   color: $normalColor;
+   &.b {
+      @include font($fs--h5, bold, $ff--bold);
+   }
+   &.invert {
+      color: $invertColor;
+   }
+}
+h6,.h6 {
+   @include font($fs--h6, normal, $ff--base);
+   color: $normalColor;
+   &.b {
+      @include font($fs--h6, bold, $ff--bold);
+   }
+   &.invert {
+      color: $invertColor;
+   }
+}

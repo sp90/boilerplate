@@ -1,0 +1,59 @@
+/*------------------------------------*\
+
+  [Modular SASS]
+    Created by        : Simon Dragsbæk Petersen
+    Creators webpage: : www.Nomis.dk
+    Repo at           : github.com/sp90/modularSass
+
+
+  Content:
+
+    [1] Vendor
+        - Libraries for sass such as mixin libs or animations 
+    [2] Settings
+        - Here you set global variables, include fonts, extends & grid
+    [3] Core
+        - Settings contain, text setup, headers, default for html and body tag
+        - Think of it here you only use basic elements predefined html tags
+          and only using classes to extend the use of tags(h1, h2, h...) 
+          or similar tags
+          fx <h1 class="invert"></h1> tags would make its color invert
+    [4] Modules
+        - Here goes modules like sidebar, topbar and more
+        - Inside you can make sub-modules for different elements and more
+    [5] Pages
+        - Here you add pages specific style such as a page wrapper setup and more
+
+/*------------------------------------*/
+
+
+/*------------------------------------*\
+  [1] Vendor
+/*------------------------------------*/
+@import "vendor/vendor";
+
+
+/*------------------------------------*\
+  [2] Settings
+/*------------------------------------*/
+@import "settings/settings";
+
+
+/*------------------------------------*\
+  [3] Core
+/*------------------------------------*/
+@import "core/core";
+
+
+/*------------------------------------*\
+  [4] Modules
+/*------------------------------------*/
+@import "modules/modules";
+
+
+/*------------------------------------*\
+  [5] Pages
+/*------------------------------------*/
+@import "pages/pages";
+
+

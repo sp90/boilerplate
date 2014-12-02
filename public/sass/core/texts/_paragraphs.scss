@@ -1,0 +1,14 @@
+p {
+   @include font($fs--p, normal, $ff--base);
+   margin-top: 0;
+   &.i {
+      font-style: italic;
+   }  
+   &.b { 
+      font-weight: bold;
+      font-family: $ff--bold;
+   }
+   &.w {
+   	  color: white;
+   }
+}

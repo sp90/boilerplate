@@ -1,0 +1,12 @@
+$breakpoints     : (
+	'nano'  '(max-width: 568px)',
+    'milli' '(min-width: 569px)',
+    'centi' '(min-width: 960px)',
+    'kilo'  '(min-width: 1025px)',
+    'mega'  '(min-width: 1360px)',
+    'giga'  '(min-width: 1900px)'
+) !default;
+
+$breakpoint-has-widths: ('nano', 'milli', 'centi', 'kilo', 'mega', 'giga') !default;
+$breakpoint-has-push:   ('nano', 'milli', 'centi', 'kilo', 'mega', 'giga') !default;
+$breakpoint-has-pull:   ('nano', 'milli', 'centi', 'kilo', 'mega', 'giga') !default;

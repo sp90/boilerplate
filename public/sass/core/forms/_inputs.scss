@@ -1,0 +1,9 @@
+input, 
+textarea {
+    @include placeholder { 
+        color: #fff;
+    }
+	&:focus {
+		outline:none;
+	}
+}
