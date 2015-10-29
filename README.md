@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/sp90/boilerplate.png?label=ready&title=Ready)](https://waffle.io/sp90/boilerplate)
 Boilerplate
 ===========
 
